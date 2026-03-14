@@ -7,6 +7,19 @@
 #include "image.h"
 using namespace ComputerVisionProjects;
 
+const ComputerVisionProjects::Image& turnToBinaryImg(Image& input_image, int threshold) {
+  for (int row = 0; row < input_image.num_rows(); ++row) {
+    for (int col = 0; col < input_image.num_columns(); ++col) {
+      if (input_image.GetPixel(row, col) >= threshold)
+        input_image.SetPixel(row, col, 255);
+      else
+        input_image.SetPixel(row, col, 0);
+    }
+  }
+
+  return input_image;
+}
+
 int main(int argc, char **argv){
   
   if (argc != 4) {
@@ -20,12 +33,10 @@ int main(int argc, char **argv){
 
   std::cout << "Running p1 " << input_file << " " 
             << threshold << " " << output_file << std::endl;
-  turnToBinaryImg(input_file, threshold);
-  std::cout << "Finished p1.";
-}
-
-void turnToBinaryImg(std::string input_file, int threshold) {
-  Image* input_image;
+  Image* input_image = new Image();
   ReadImage(input_file, input_image);
-  for ()
+  ComputerVisionProjects::Image binary_image = turnToBinaryImg(*input_image, threshold);
+  std::cout << "Writing image." << std::endl;
+  ComputerVisionProjects::WriteImage(output_file, binary_image);
+  std::cout << "Finished p1.";
 }
