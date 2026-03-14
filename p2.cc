@@ -54,7 +54,7 @@ Image sequencial_labler(Image binary) {
   }
 
   //----------------- IMAGE FORMATION -----------------
-  int gradient = 255/counter;
+  int gradient = 255/(counter-1);
   for (int r = 0; r < H; r++) {
     for (int c = 0; c < W; c++) {
       int curr_obj = binary.GetPixel(r,c);
